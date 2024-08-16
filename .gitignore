@@ -1,4 +1,5 @@
 .idea/
 __pycache__/
 *.pyc
-
+*.cpython-38.pyc
+*.cpython-38.pyc
