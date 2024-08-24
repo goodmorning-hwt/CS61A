@@ -172,10 +172,23 @@ def memo_diff(diff_function):
     def memoized(typed, source, limit):
         # BEGIN PROBLEM EC
         "*** YOUR CODE HERE ***"
-        # END PROBLEM EC
+        key = (typed, source)
+        if key in cache:
+            cache_value, cache_limit = cache[key]
+            if limit >= cache_limit:
+                return cache_value
+            else:
+                # return cache_value
+                return limit + 1
+        else:
+            result = diff_function(typed, source, limit)
+            cache[key] = (result, limit)
+            return result
 
     return memoized
 
+
+# END PROBLEM E
 
 ###########
 # Phase 2 #
@@ -255,6 +268,7 @@ def furry_fixes(typed, source, limit):
     # END PROBLEM 6
 
 
+@memo_diff
 def minimum_mewtations(typed, source, limit):
     """A diff function for autocorrect that computes the edit distance from TYPED to SOURCE.
     This function takes in a string TYPED, a string SOURCE, and a number LIMIT.
@@ -407,6 +421,8 @@ def time_per_word_match(words, timestamps_per_player):
     """
     # BEGIN PROBLEM 10
     "*** YOUR CODE HERE ***"
+    words, times = time_per_word(words, timestamps_per_player)
+    return match(words, times)
     # END PROBLEM 10
 
 
@@ -429,6 +445,25 @@ def fastest_words(match_object):
     word_indices = range(len(get_all_words(match_object)))  # contains an *index* for each word
     # BEGIN PROBLEM 11
     "*** YOUR CODE HERE ***"
+    time_list = get_all_times(match_object)
+    player_count = len(time_list)
+    word_list = get_all_words(match_object)
+    result = [[] for _ in range(player_count)]
+    word_num = len(word_list)
+
+    best_player_per_word_list = []
+    for word_index in range(word_num):
+        min_time = float('inf')
+        min_time_player_index = 0
+        for player_index in range(len(time_list)):
+            if time_list[player_index][word_index] < min_time:
+                min_time = time_list[player_index][word_index]
+                min_time_player_index = player_index
+        # best_player_per_word_list[word_index] = min_time_player_index
+        result[min_time_player_index].append(word_list[word_index])
+    return result
+    # for word_index in range(len(word_list)):
+    #     result[best_player_per_word_list[word_index]].append(word_list[word_index])
     # END PROBLEM 11
 
 
