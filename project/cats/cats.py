@@ -267,27 +267,37 @@ def minimum_mewtations(typed, source, limit):
     >>> big_limit = 10
     >>> minimum_mewtations("cats", "scat", big_limit)       # cats -> scats -> scat
     2
-    >>> minimum_mewtations("purng", "purring", big_limit)   # purng -> purrng -> purring
+    >>> minimum_mewtations(purng", "purring", big_limit)   # purng -> purrng -> purring
     2
     >>> minimum_mewtations("ckiteus", "kittens", big_limit) # ckiteus -> kiteus -> kitteus -> kittens
     3
     """
-    assert False, 'Remove this line'
-    if ___________:  # Base cases should go here, you may add more base cases as needed.
-        # BEGIN
-        "*** YOUR CODE HERE ***"
-        # END
+    # assert False, 'Remove this line'
+
+    if len(typed) == 0 or len(source) == 0:
+        return max(len(typed), len(source))
+
     # Recursive cases should go below here
-    if ___________:  # Feel free to remove or add additional cases
+    if limit == -1 or typed == source:
         # BEGIN
         "*** YOUR CODE HERE ***"
+        return 0
         # END
     else:
-        add = ...  # Fill in these lines
-        remove = ...
-        substitute = ...
+        # add = ...  # Fill in these lines
+        # remove = ...
+        # substitute = ...
         # BEGIN
         "*** YOUR CODE HERE ***"
+        if typed[0] != source[0]:
+            add = 1 + int(minimum_mewtations(source[0] + typed, source, limit - 1))
+            remove = 1 + int(minimum_mewtations(typed[1:], source, limit - 1))
+            substitute = 1 + int(minimum_mewtations(source[0] + typed[1:], source, limit - 1))
+            return min(add, remove, substitute)
+
+        elif typed[0] == source[0]:
+            return int(minimum_mewtations(typed[1:], source[1:], limit))
+
         # END
 
 
