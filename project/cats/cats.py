@@ -289,6 +289,9 @@ def minimum_mewtations(typed, source, limit):
         # substitute = ...
         # BEGIN
         "*** YOUR CODE HERE ***"
+        add = limit + 1
+        remove = limit + 1
+        substitute = limit + 1
         if typed[0] != source[0]:
             add = 1 + int(minimum_mewtations(source[0] + typed, source, limit - 1))
             remove = 1 + int(minimum_mewtations(typed[1:], source, limit - 1))
@@ -344,6 +347,15 @@ def report_progress(typed, source, user_id, upload):
     """
     # BEGIN PROBLEM 8
     "*** YOUR CODE HERE ***"
+    ans = 0
+    for i in range(min(len(typed), len(source))):
+        if typed[i] == source[i]:
+            ans += 1
+        else:
+            break
+    ans /= len(source)
+    upload({'id': user_id, 'progress': ans})
+    return ans
     # END PROBLEM 8
 
 
