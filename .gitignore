@@ -1,5 +1,11 @@
-.idea/
-__pycache__/
-*.pyc
-*.cpython-38.pyc
-*.cpython-38.pyc
+# Ignore everything
+*
+
+# But not these files...
+!*.scm
+!*.py
+!*.md
+
+# Also don't ignore directories, so Git can track the .scm, .py, .md files inside them
+!*/
+
